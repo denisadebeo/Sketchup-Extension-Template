@@ -1,0 +1,10 @@
+{
+	"cmd1":
+	{
+		"description":"description",
+		"command":"controler",
+		"isMenu":true,
+		"isToolbar":true,
+		"isContext":true
+	}	
+}

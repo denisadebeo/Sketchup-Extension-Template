@@ -1,0 +1,12 @@
+{
+	"log":{ 
+		"promt": "Log :",
+		"list" : "YES|NO",
+		"defauls":"0"
+	},
+	"string":{
+		"promt": "exemple Of String",
+		"list" : "",
+		"defauls":"adebeo"
+	}
+}

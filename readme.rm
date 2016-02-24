@@ -1,0 +1,16 @@
+
+TO create a new extension
+
+1 - rename adebeo_extensionName.rb:
+	adebeo should be the coder name
+	extensionName should be the extension name
+
+2 - rename adebeo_extensionName folder
+
+3 - inside adebeo_extensionName/*.rb
+	rename Adebeo module
+	rename ExtensionName module
+
+4 - define controller and toolbar
+5 - config and useroption
+
