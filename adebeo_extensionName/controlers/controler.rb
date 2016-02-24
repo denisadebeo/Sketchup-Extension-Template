@@ -4,7 +4,8 @@ module Adebeo::ExtensionName
 		def initialize()
 			@model = Sketchup.active_model
 			@definitions = @model.definitions
-			puts Adebeo::ExtensionName::getUserOptions()
+			@options = Adebeo::ExtensionName::getUserOptions()
+			puts @options.inspect
 		end
 	end
 end

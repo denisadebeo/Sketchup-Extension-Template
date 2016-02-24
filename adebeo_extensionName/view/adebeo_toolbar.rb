@@ -58,12 +58,22 @@ module Adebeo::ExtensionName
             createCommand(spec)
         end
 
+        # create option command in menu 
+        extenionName = self.to_s.downcase.gsub("::","_")
+        commandLine = "#{self.to_s}::getUserOptions(true)"
+        spec = {
+                :name => "option",
+                :description=>"set user option",
+                :command=>commandLine,
+                :submenu=>@plugins_menu
+            }
+        createCommand(spec)  
+
         # if develloppement mode create a reloader for controler
         if isDevelloppement
             extenionName = self.to_s.downcase.gsub("::","_")
             p = "#{File.dirname(__FILE__)}/../controlers/**/*.rb"
             commandLine = "Dir.glob('#{p}').each{|f| load f}"
-            puts commandLine
             spec = {
                     :name => "reload",
                     :description=>"Reload All File",

@@ -1,20 +1,21 @@
 module Adebeo::ExtensionName
 
   def self.getUserOptions(force = false)
+
     #get the user option define in userOptions.json with setting in options.json
     actualFolder = File.dirname(__FILE__)
     options = Adebeo::getHashFromJsonFile "#{actualFolder}/options.json"
     userOptions = Adebeo::getHashFromJsonFile "#{actualFolder}/userOptions.json"    
-
+    skipDialogBox = true
     #replace defaut value of the user choice
     if userOptions
       userOptions.each{|k,v|options[k][:defauls]=v}
     else
-      skipDialogBox = true
+      skipDialogBox = false
     end
-    
+
     # if dialo
-  	if not skipDialogBox || force
+  	if not skipDialogBox or force
   	  prompts = []
   		options.each{|key,option| prompts << option[:promt]}
 
