@@ -2,7 +2,7 @@
 	"cmd1":
 	{
 		"description":"description",
-		"command":"controler",
+		"command":"Adebeo::ExtensioName::Controler.new()",
 		"isMenu":true,
 		"isToolbar":true,
 		"isContext":true

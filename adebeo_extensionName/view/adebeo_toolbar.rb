@@ -50,7 +50,7 @@ module Adebeo::ExtensionName
             spec = {
                 :name => k.to_s,
                 :description => v[:description],
-                :command=> "#{self.to_s}::#{v[:command].capitalize}.new()"
+                :command=> "#{v[:command]}"
             }
             spec[:submenu] = @plugins_menu if v[:isMenu]
             spec[:toolbar] = @toolbar if v[:isToolbar]
@@ -94,8 +94,8 @@ module Adebeo::ExtensionName
         }
         if spec[:toolbar]
             cmdAdebeo.tooltip = spec[:description]
-            cmdAdebeo.small_icon = "icon/#{spec[:nom]}_SM.png"
-            cmdAdebeo.large_icon = "icon/#{spec[:nom]}_BG.png"
+            cmdAdebeo.small_icon = "../icon/#{spec[:name]}_SM.png"
+            cmdAdebeo.large_icon = "../icon/#{spec[:name]}_BG.png"
             toolbar = spec[:toolbar].add_item cmdAdebeo
         end
         if spec[:submenu]
