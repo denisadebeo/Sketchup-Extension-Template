@@ -73,7 +73,7 @@ module Adebeo::ExtensionName
         if isDevelloppement
             extenionName = self.to_s.downcase.gsub("::","_")
             p = "#{File.dirname(__FILE__)}/../controlers/**/*.rb"
-            commandLine = "Dir.glob('#{p}').each{|f| load f}"
+            commandLine = "Dir.glob('#{p}').each{|f| load f};SKETCHUP_CONSOLE.clear()"
             spec = {
                     :name => "reload",
                     :description=>"Reload All File",
