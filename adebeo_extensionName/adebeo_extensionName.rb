@@ -1,7 +1,7 @@
 adebeoFileExtensionName = "adebeo_extensionName"
 
-require 'sketchup.rb'
-require 'json'
+Sketchup::require 'sketchup'
+Sketchup::require 'json'
 
 module Adebeo
   module ExtensionName
@@ -12,7 +12,7 @@ end
 adebeoRubyPath = File.dirname(__FILE__)
 
 # REMOVE EXTENSION BEFORE SCRUMBLE
-adebeoRubyExtensions = ".rb"
+adebeoRubyExtensions = File.extname(__FILE__)
 #$adebeoRubyExtensions = ""
 
 #Set to false before Prod
@@ -24,8 +24,16 @@ isDevelloppement = true
 
 extensionRubyfiles = Dir.glob("#{adebeoRubyPath}/**/*.rb")
 extensionRubyfiles.each{|file|
-	Sketchup::require file if File.basename(file, adebeoRubyExtensions) != adebeoFileExtensionName
+	Sketchup::require file if ![adebeoExtensionFile].include? File.basename(file, adebeoRubyExtensions)
 }
+
+extensionRubyfiles = Dir.glob("#{adebeoRubyPath}/**/*.rbs")
+extensionRubyfiles.each{|file|
+	Sketchup::require file if ![adebeoExtensionFile].include? File.basename(file, adebeoRubyExtensions)
+}
+
+
+
 
 if not file_loaded?(adebeoFileExtensionName+"#{adebeoRubyExtensions}")
  if isDevelloppement
