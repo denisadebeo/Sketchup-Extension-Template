@@ -25,73 +25,78 @@ module Adebeo::ExtensionName
         #get the extension name
         @extensionName = self.to_s.split("::").last
 
-        #get command definition from the json inside cmdInToolBar.json
-        cmdOfExtension = Adebeo::getHashFromJsonFile "#{File.dirname(__FILE__)}/toolbarAndCmd.json"
+        toolbar_file = Dir.glob("#{File.dirname(__FILE__)}/*.json")
+        toolbars = toolbar_file.map{|file| {:name=>File.basename(file, '.json').capitalize,:json_file=>file} }
 
-        #create menu if needed
-        arrayOdIsMenu = cmdOfExtension.select{|k,v| v[:isMenu] ==true}
-        @plugins_menu = UI.menu("Plugins").add_submenu(@extensionName) if (arrayOdIsMenu.length > 0 or isDevelloppement)
-        
-        #create toolbar if needed
-        arrayOdIsToolbar = cmdOfExtension.select{|k,v| v[:isToolbar] ==true}
-        @toolbar = UI::Toolbar.new @extensionName if arrayOdIsToolbar.length >0     
-        
-        #create context if needed
-        arrayOdIsContext = cmdOfExtension.select{|k,v| v[:isContext] ==true}
+        toolbars.each{|toolbar|
+            cmdOfExtension = Adebeo::getHashFromJsonFile toolbar[:json_file]
 
-        #create all commande
-        cmd_contexts = {}
-        cmdOfExtension.each do |k,v|
-            spec = {
-                :name => k.to_s,
-                :description => v[:description],
-                :command=> "#{v[:command]}"
-            }
-            spec[:submenu] = @plugins_menu if v[:isMenu]
-            spec[:toolbar] = @toolbar if v[:isToolbar]
-            spec[:subContextMenu] = v[:isContext] if v[:isContext]
+            #create menu if needed
+            arrayOdIsMenu = cmdOfExtension.select{|k,v| v[:isMenu] ==true}
+            @plugins_menu = UI.menu("Plugins").add_submenu(toolbar[:name]) if (arrayOdIsMenu.length > 0 or isDevelloppement)
+            
+            #create toolbar if needed
+            arrayOdIsToolbar = cmdOfExtension.select{|k,v| v[:isToolbar] ==true}
+            @toolbar = UI::Toolbar.new toolbar[:name] if arrayOdIsToolbar.length >0     
+            
+            #create context if needed
+            arrayOdIsContext = cmdOfExtension.select{|k,v| v[:isContext] ==true}
 
-            cmdAdebeo = createCommand(spec)
-            if v[:isContext]
-                cmd_contexts[v[:description]] = "#{v[:command]}"
-            end
-        end
-
-
-        if arrayOdIsContext.length > 0
-            UI.add_context_menu_handler do |context_menu|
-                subcontextmenu = context_menu.add_submenu(@extensionName)
-                cmd_contexts.each{|description,cmdAdebeo|
-                    subcontextmenu.add_item(description) {eval(cmdAdebeo)}
+            #create all commande
+            cmd_contexts = {}
+            cmdOfExtension.each do |k,v|
+                spec = {
+                    :name => k.to_s,
+                    :description => v[:description],
+                    :command=> "#{v[:command]}"
                 }
+                spec[:submenu] = @plugins_menu if v[:isMenu]
+                spec[:toolbar] = @toolbar if v[:isToolbar]
+                spec[:subContextMenu] = v[:isContext] if v[:isContext]
+
+                cmdAdebeo = createCommand(spec)
+                if v[:isContext]
+                    cmd_contexts[v[:description]] = "#{v[:command]}"
+                end
             end
-        end
 
-        # create option command in menu 
-        extenionName = self.to_s.downcase.gsub("::","_")
-        commandLine = "#{self.to_s}::getUserOptions(true)"
-        spec = {
-                :name => "option",
-                :description=>"set user option",
-                :command=>commandLine,
-                :submenu=>@plugins_menu
-            }
-        createCommand(spec)  
 
-        # if develloppement mode create a reloader for controler
-        if isDevelloppement
-            @extenionName = self.to_s.downcase.gsub("::","_")
-            p = "#{File.dirname(__FILE__)}/../controlers/**/*.rb"
-            lib = "#{File.dirname(__FILE__)}/../adebeo_library.rb"
-            commandLine = "Dir.glob('#{p}').each{|f| load f};load '#{lib}';SKETCHUP_CONSOLE.clear()"
+            if arrayOdIsContext.length > 0
+                UI.add_context_menu_handler do |context_menu|
+                    subcontextmenu = context_menu.add_submenu(toolbar[:name])
+                    cmd_contexts.each{|description,cmdAdebeo|
+                        subcontextmenu.add_item(description) {eval(cmdAdebeo)}
+                    }
+                end
+            end
+
+            # create option command in menu 
+            extenionName = self.to_s.downcase.gsub("::","_")
+            commandLine = "#{self.to_s}::getUserOptions(true)"
             spec = {
-                    :name => "reload",
-                    :description=>"Reload All File",
+                    :name => "option",
+                    :description=>"set user option",
                     :command=>commandLine,
                     :submenu=>@plugins_menu
                 }
-            createCommand(spec)        
-        end
+            createCommand(spec)  
+
+            # if develloppement mode create a reloader for controler
+            if isDevelloppement
+                @extenionName = self.to_s.downcase.gsub("::","_")
+                p = "#{File.dirname(__FILE__)}/../controlers/**/*.rb"
+                lib = "#{File.dirname(__FILE__)}/../adebeo_library.rb"
+                commandLine = "Dir.glob('#{p}').each{|f| load f};load '#{lib}';SKETCHUP_CONSOLE.clear()"
+                spec = {
+                        :name => "reload",
+                        :description=>"Reload All File",
+                        :command=>commandLine,
+                        :submenu=>@plugins_menu
+                    }
+                createCommand(spec)        
+            end
+
+        }
 
     end
   
