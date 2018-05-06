@@ -60,6 +60,11 @@ file_where_module_name_changes.each{|file_where_module_name_change|
 	File.open(file_where_module_name_change, "w") {|file| file.puts new_contents }
 }
 
+toolbar_file = File.join(main_sub_folder_path,"view","toolbarAndCmd.json")
+new_toolbar_file = File.join(main_sub_folder_path,"view","#{extensionName_c}.json")
+File.rename(conf_file, new_conf_file)
+
+
 
 
 
