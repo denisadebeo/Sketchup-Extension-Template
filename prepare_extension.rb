@@ -1,8 +1,8 @@
 require 'fileutils' 
 
 editeur = "adebeo"
-extensionName = "import IFC"
-description = "description de l extension"
+extensionName = "sodemsystem"
+description = "Preparer rapidement vos Sodem System"
 
 editeur_c = editeur.gsub(" ","_")
 extensionName_c = extensionName.gsub(" ","_")
@@ -62,7 +62,7 @@ file_where_module_name_changes.each{|file_where_module_name_change|
 
 toolbar_file = File.join(main_sub_folder_path,"view","toolbarAndCmd.json")
 new_toolbar_file = File.join(main_sub_folder_path,"view","#{extensionName_c}.json")
-File.rename(conf_file, new_conf_file)
+File.rename(toolbar_file, new_toolbar_file)
 
 
 
