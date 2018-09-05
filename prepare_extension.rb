@@ -1,8 +1,8 @@
 require 'fileutils' 
 
-editeur = "adebeo"
-extensionName = "sodemsystem"
-description = "Preparer rapidement vos Sodem System"
+editeur = "Optimaker"
+extensionName = "Optimaker"
+description = "Modeliser vos Lunettes"
 
 editeur_c = editeur.gsub(" ","_")
 extensionName_c = extensionName.gsub(" ","_")

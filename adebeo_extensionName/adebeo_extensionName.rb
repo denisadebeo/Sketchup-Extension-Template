@@ -24,12 +24,12 @@ isDevelloppement = true
 
 extensionRubyfiles = Dir.glob("#{adebeoRubyPath}/**/*.rb")
 extensionRubyfiles.each{|file|
-	Sketchup::require file if ![adebeoExtensionFile].include? File.basename(file, adebeoRubyExtensions)
+	Sketchup::require file if ![File.basename(__FILE__, adebeoRubyExtensions)].include? File.basename(file, adebeoRubyExtensions)
 }
 
 extensionRubyfiles = Dir.glob("#{adebeoRubyPath}/**/*.rbs")
 extensionRubyfiles.each{|file|
-	Sketchup::require file if ![adebeoExtensionFile].include? File.basename(file, adebeoRubyExtensions)
+	Sketchup::require file if ![File.basename(__FILE__, adebeoRubyExtensions)].include? File.basename(file, adebeoRubyExtensions)
 }
 
 
