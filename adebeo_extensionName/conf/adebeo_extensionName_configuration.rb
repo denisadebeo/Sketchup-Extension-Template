@@ -3,7 +3,10 @@ module Adebeo::ExtensionName
   def self.getUserOptions(force = false)
 
     #get the user option define in userOptions.json with setting in options.json
-    actualFolder = File.dirname(__FILE__)
+
+    actualFolder = __dir__.dup
+    actualFolder.force_encoding('UTF-8') if actualFolder.respond_to?(:force_encoding)
+
     options = Adebeo::getHashFromJsonFile "#{actualFolder}/options.json"
     userOptions = Adebeo::getHashFromJsonFile "#{actualFolder}/userOptions.json"    
     skipDialogBox = true
@@ -66,7 +69,11 @@ module Adebeo::ExtensionName
     # get the hash define in the configuration.json file
     # configuration are define by symbol (ex: configurations[:key]) except if sym is false
     # be careful to don't set same name in userOption and initialiser
-    initializer = Adebeo::getHashFromJsonFile "#{File.dirname(__FILE__)}/initializer.json"
+
+    actualFolder = __dir__.dup
+    actualFolder.force_encoding('UTF-8') if actualFolder.respond_to?(:force_encoding)
+
+    initializer = Adebeo::getHashFromJsonFile "#{actualFolder}/initializer.json"
     return initializer
   end
 

@@ -25,7 +25,12 @@ module Adebeo::ExtensionName
         #get the extension name
         @extensionName = self.to_s.split("::").last
 
-        toolbar_file = Dir.glob("#{File.dirname(__FILE__)}/*.json")
+
+        current_path = __dir__.dup
+        current_path.force_encoding('UTF-8') if extension_dir.respond_to?(:force_encoding)
+
+
+        toolbar_file = Dir.glob("#{current_path}/*.json")
         toolbars = toolbar_file.map{|file| {:name=>File.basename(file, '.json').capitalize,:json_file=>file} }
 
         toolbars.each{|toolbar|
@@ -84,8 +89,13 @@ module Adebeo::ExtensionName
             # if develloppement mode create a reloader for controler
             if isDevelloppement
                 @extenionName = self.to_s.downcase.gsub("::","_")
-                p = "#{File.dirname(__FILE__)}/../controlers/**/*.rb"
-                lib = "#{File.dirname(__FILE__)}/../adebeo_library.rb"
+
+
+                current_path = __dir__.dup
+                current_path.force_encoding('UTF-8') if extension_dir.respond_to?(:force_encoding)
+
+                p = "#{current_path}/../controlers/**/*.rb"
+                lib = "#{current_path}/../adebeo_library.rb"
                 commandLine = "Dir.glob('#{p}').each{|f| load f};load '#{lib}';SKETCHUP_CONSOLE.clear()"
                 spec = {
                         :name => "reload",

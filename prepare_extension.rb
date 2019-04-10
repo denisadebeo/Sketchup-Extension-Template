@@ -1,8 +1,8 @@
 require 'fileutils' 
 
-editeur = "Optimaker"
-extensionName = "Optimaker"
-description = "Modeliser vos Lunettes"
+editeur = "Adebeo"
+extensionName = "Makeit"
+description = "Pose les pièces aux sols"
 
 editeur_c = editeur.gsub(" ","_")
 extensionName_c = extensionName.gsub(" ","_")
