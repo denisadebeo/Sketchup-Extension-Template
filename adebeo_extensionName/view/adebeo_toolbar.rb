@@ -27,7 +27,7 @@ module Adebeo::ExtensionName
 
 
         current_path = __dir__.dup
-        current_path.force_encoding('UTF-8') if extension_dir.respond_to?(:force_encoding)
+        current_path.force_encoding('UTF-8') if current_path.respond_to?(:force_encoding)
 
 
         toolbar_file = Dir.glob("#{current_path}/*.json")
@@ -92,7 +92,7 @@ module Adebeo::ExtensionName
 
 
                 current_path = __dir__.dup
-                current_path.force_encoding('UTF-8') if extension_dir.respond_to?(:force_encoding)
+                current_path.force_encoding('UTF-8') if current_path.respond_to?(:force_encoding)
 
                 p = "#{current_path}/../controlers/**/*.rb"
                 lib = "#{current_path}/../adebeo_library.rb"

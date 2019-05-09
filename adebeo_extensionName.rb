@@ -5,7 +5,7 @@
   
 
   current_path = __dir__.dup
-  current_path.force_encoding('UTF-8') if extension_dir.respond_to?(:force_encoding)
+  current_path.force_encoding('UTF-8') if current_path.respond_to?(:force_encoding)
 
   extension_file = __FILE__.dup
   extension_file.force_encoding('UTF-8') if extension_file.respond_to?(:force_encoding) 
