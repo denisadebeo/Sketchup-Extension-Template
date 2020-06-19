@@ -20,7 +20,7 @@ If you set a isToolbar to true You must puts icons files:
 =end
 
 module Adebeo::ExtensionName
-    def self.toolbar(isDevelloppement) 
+    def self.toolbar() 
 
         #get the extension name
         @extensionName = self.to_s.split("::").last
@@ -38,7 +38,7 @@ module Adebeo::ExtensionName
 
             #create menu if needed
             arrayOdIsMenu = cmdOfExtension.select{|k,v| v[:isMenu] ==true}
-            @plugins_menu = UI.menu("Plugins").add_submenu(toolbar[:name]) if (arrayOdIsMenu.length > 0 or isDevelloppement)
+            @plugins_menu = UI.menu("Plugins").add_submenu(toolbar[:name]) if (arrayOdIsMenu.length > 0 or ISDEVELLOPPEMENT)
             
             #create toolbar if needed
             arrayOdIsToolbar = cmdOfExtension.select{|k,v| v[:isToolbar] ==true}
@@ -87,23 +87,25 @@ module Adebeo::ExtensionName
             createCommand(spec)  
 
             # if develloppement mode create a reloader for controler
-            if isDevelloppement
+            if ISDEVELLOPPEMENT
                 @extenionName = self.to_s.downcase.gsub("::","_")
 
 
                 current_path = __dir__.dup
                 current_path.force_encoding('UTF-8') if current_path.respond_to?(:force_encoding)
 
-                p = "#{current_path}/../controlers/**/*.rb"
                 lib = "#{current_path}/../adebeo_library.rb"
-                commandLine = "Dir.glob('#{p}').each{|f| load f};load '#{lib}';SKETCHUP_CONSOLE.clear()"
+                folders = ["#{current_path}/../controlers/**/*.rb","#{current_path}/../models/**/*.rb"]
+                files_to_be_reloadeds = folders.map{|p| Dir.glob(p)}.flatten
+                files_to_be_reloadeds << lib
+                commandLine = "#{files_to_be_reloadeds}.each{|f| load f};SKETCHUP_CONSOLE.clear()"
                 spec = {
                         :name => "reload",
                         :description=>"Reload All File",
                         :command=>commandLine,
                         :submenu=>@plugins_menu
                     }
-                createCommand(spec)        
+                createCommand(spec)      
             end
 
         }

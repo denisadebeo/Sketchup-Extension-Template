@@ -2,7 +2,7 @@ adebeoFileExtensionName = "adebeo_extensionName"
 
 module Adebeo
   module ExtensionName
-
+	ISDEVELLOPPEMENT = true
   end
 end
 
@@ -18,30 +18,21 @@ adebeoRubyExtensions = File.extname(adebeoRubyfile)
 #$adebeoRubyExtensions = ""
 
 #Set to false before Prod
-isDevelloppement = true
-
-
 # SELECTE SERVER
 #$adebeoServerPath =  'http://localhost:3000'
 
-extensionRubyfiles = Dir.glob("#{adebeoRubyPath}/**/*.rb")
-extensionRubyfiles.each{|file|
-	Sketchup::require file if ![File.basename(adebeoRubyfile, adebeoRubyExtensions)].include? File.basename(file, adebeoRubyExtensions)
+["rb","rbs","rbe"].each{|extension|
+  extensionRubyfiles = Dir.glob("#{adebeoRubyPath}/**/*.#{extension}")
+  extensionRubyfiles.each{|file|
+  	Sketchup::require file if ![File.basename(adebeoRubyfile, adebeoRubyExtensions)].include? File.basename(file, adebeoRubyExtensions)
+  }
 }
-
-extensionRubyfiles = Dir.glob("#{adebeoRubyPath}/**/*.rbs")
-extensionRubyfiles.each{|file|
-	Sketchup::require file if ![File.basename(adebeoRubyfile, adebeoRubyExtensions)].include? File.basename(file, adebeoRubyExtensions)
-}
-
-
-
 
 if not file_loaded?(adebeoFileExtensionName+"#{adebeoRubyExtensions}")
- if isDevelloppement
+ if Adebeo::ExtensionName::ISDEVELLOPPEMENT
  	Sketchup.send_action "showRubyPanel:"
  end
- Adebeo::ExtensionName::toolbar(isDevelloppement)
+ Adebeo::ExtensionName::toolbar
 end
 
 file_loaded("#{adebeoFileExtensionName}#{adebeoRubyExtensions}")
