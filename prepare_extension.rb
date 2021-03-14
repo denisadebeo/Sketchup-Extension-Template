@@ -1,8 +1,8 @@
 require 'fileutils' 
 
 editeur = "Adebeo"
-extensionName = "Makeit"
-description = "Pose les pièces aux sols"
+extensionName = "LayherDaeFactory"
+description = "Dae pour Windev"
 
 editeur_c = editeur.gsub(" ","_")
 extensionName_c = extensionName.gsub(" ","_")

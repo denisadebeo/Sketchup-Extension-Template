@@ -117,15 +117,22 @@ module Adebeo::ExtensionName
         #puts spec.inspect
         #iS_OSX = Sketchup.platform == :platform_osx
         #iS_OSX ? cursorExtension ="pdf" : cursorExtension ="png"
-        cursorExtension ="png"
         description = spec[:description]
         cmdAdebeo = UI::Command.new(description){
           eval(spec[:command])
         }
         if spec[:toolbar]
+            MAC ? toolbar_extension ="pdf" : toolbar_extension ="svg"
+            vertoriel_path = File.join(PLUGIN_PATH,"icon","#{spec[:name]}.#{toolbar_extension}")
+            if File.exist? vertoriel_path
+                cmdAdebeo.small_icon = vertoriel_path
+                cmdAdebeo.large_icon = vertoriel_path
+            else
+                toolbar_extension ="png"
+                cmdAdebeo.small_icon = File.join(PLUGIN_PATH,"icon","#{spec[:name]}_SM.#{toolbar_extension}")
+                cmdAdebeo.large_icon = File.join(PLUGIN_PATH,"icon","#{spec[:name]}_BG.#{toolbar_extension}")
+            end
             cmdAdebeo.tooltip = spec[:description]
-            cmdAdebeo.small_icon = "../icon/#{spec[:name]}_SM.#{cursorExtension}"
-            cmdAdebeo.large_icon = "../icon/#{spec[:name]}_BG.#{cursorExtension}"
             toolbar = spec[:toolbar].add_item cmdAdebeo
         end
         if spec[:submenu]
