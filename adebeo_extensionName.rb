@@ -21,8 +21,8 @@
       PLATFORM_IS_64BIT = (Sketchup.respond_to?(:is_64bit?) && Sketchup.is_64bit?).freeze
       PLATFORM_IS_32_BIT = (!PLATFORM_IS_64BIT).freeze
       PLUGIN = self
-
-      VERSION = 1
+      PLUGIN_PATH = __dir__.dup
+      VERSION = "1"
 
     end
   end

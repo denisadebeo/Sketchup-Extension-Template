@@ -1,8 +1,8 @@
 require 'fileutils' 
 
 editeur = "Adebeo"
-extensionName = "LayherDaeFactory"
-description = "Dae pour Windev"
+extensionName = "MyExtensionName"
+description = "Export Sketchup to .layher"
 
 editeur_c = editeur.gsub(" ","_")
 extensionName_c = extensionName.gsub(" ","_")
@@ -49,8 +49,10 @@ File.open(main_extension_file, "w") {|file| file.puts new_contents }
 controler_file = File.join(main_sub_folder_path,"controlers","controler.rb")
 lib_file = File.join(main_sub_folder_path,"adebeo_library.rb")
 tool_bar = File.join(main_sub_folder_path,"view","adebeo_toolbar.rb")
+cmd_json = File.join(main_sub_folder_path,"view","toolbarAndCmd.json")
+main_json = File.join(main_sub_folder_path,"adebeo_extensionName.rb")
 # Modifie le nom du module
-file_where_module_name_changes = [sub_main_extension_file, controler_file, new_conf_file, lib_file, tool_bar]
+file_where_module_name_changes = [sub_main_extension_file, controler_file, new_conf_file, lib_file, tool_bar,cmd_json]
 file_where_module_name_changes.each{|file_where_module_name_change|
 	text = File.read(file_where_module_name_change)
 	new_contents = text.gsub("adebeo_extensionName","#{editeur_c}_#{extensionName_c}")
