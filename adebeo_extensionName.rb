@@ -14,7 +14,7 @@
     module ExtensionName
       LH = LanguageHandler.new("AdebeoExtensionName.strings").freeze
 
-      MAC     = ((Object::RUBY_PLATFORM =~ /darwin/i) ? true : false).freeze
+      MAC = ((Object::RUBY_PLATFORM =~ /darwin/i) ? true : false).freeze
       WIN = (!MAC).freeze
 
       # x86 vs x64
@@ -30,9 +30,6 @@
   unless file_loaded?(extension_file)
 
     extension_path = File.join(current_path,"adebeo_extensionName","adebeo_extensionName.rb")
-    if !File.exist? extension_path
-      extension_path = File.join(current_path,"adebeo_extensionName","adebeo_extensionName.rbs")
-    end
 
     if !File.exist? extension_path
       extension_path = File.join(current_path,"adebeo_extensionName","adebeo_extensionName.rbe")

@@ -122,15 +122,15 @@ module Adebeo::ExtensionName
           eval(spec[:command])
         }
         if spec[:toolbar]
-            Adebeo::ExtensionName::MAC ? toolbar_extension ="pdf" : toolbar_extension ="svg"
-            vertoriel_path = File.join(Adebeo::ExtensionName::PLUGIN_PATH,"icon","#{spec[:name]}.#{toolbar_extension}")
+            PLUGIN::MAC ? toolbar_extension ="pdf" : toolbar_extension ="svg"
+            vertoriel_path = File.join(PLUGIN::PLUGIN_PATH,"icon","#{spec[:name]}.#{toolbar_extension}")
             if File.exist? vertoriel_path
                 cmdAdebeo.small_icon = vertoriel_path
                 cmdAdebeo.large_icon = vertoriel_path
             else
                 toolbar_extension ="png"
-                cmdAdebeo.small_icon = File.join(Adebeo::ExtensionName::PLUGIN_PATH,"icon","#{spec[:name]}_SM.#{toolbar_extension}")
-                cmdAdebeo.large_icon = File.join(Adebeo::ExtensionName::PLUGIN_PATH,"icon","#{spec[:name]}_BG.#{toolbar_extension}")
+                cmdAdebeo.small_icon = File.join(PLUGIN::PLUGIN_PATH,"icon","#{spec[:name]}_SM.#{toolbar_extension}")
+                cmdAdebeo.large_icon = File.join(PLUGIN::PLUGIN_PATH,"icon","#{spec[:name]}_BG.#{toolbar_extension}")
             end
             cmdAdebeo.tooltip = spec[:description]
             toolbar = spec[:toolbar].add_item cmdAdebeo

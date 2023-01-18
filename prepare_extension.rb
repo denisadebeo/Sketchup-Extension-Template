@@ -1,8 +1,8 @@
 require 'fileutils' 
 
-editeur = "Adebeo"
-extensionName = "MyExtensionName"
-description = "Export Sketchup to .layher"
+editeur = "EditorName".capitalize
+extensionName = "ExtensionName".capitalize
+description = "Palette d outils pour mon métier"
 
 editeur_c = editeur.gsub(" ","_")
 extensionName_c = extensionName.gsub(" ","_")
@@ -40,9 +40,14 @@ File.rename(conf_file, new_conf_file)
 text = File.read(main_extension_file)
 new_contents = text.gsub("adebeo_extensionName/adebeo_extensionName.rb", "#{editeur_c}_#{extensionName_c}/#{editeur_c}_#{extensionName_c}.rb")
 new_contents = new_contents.gsub("adebeo", editeur)
+new_contents = new_contents.gsub("Adebeo", editeur_c)
 new_contents = new_contents.gsub("extensionName", extensionName)
 new_contents = new_contents.gsub("2016", Time.new.year.to_s)
 new_contents = new_contents.gsub("description!", description)
+new_contents = new_contents.gsub("Adebeo::ExtensionName", "#{editeur_c}::#{extensionName_c}")
+new_contents = new_contents.gsub("AdebeoExtensionName.strings", "#{editeur_c}#{extensionName_c}.strings")
+
+
 File.open(main_extension_file, "w") {|file| file.puts new_contents }
 
 

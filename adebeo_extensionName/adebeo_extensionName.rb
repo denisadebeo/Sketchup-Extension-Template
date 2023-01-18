@@ -21,7 +21,7 @@ adebeoRubyExtensions = File.extname(adebeoRubyfile)
 # SELECTE SERVER
 #$adebeoServerPath =  'http://localhost:3000'
 
-["rb","rbs","rbe"].each{|extension|
+["rb","rbe"].each{|extension|
   extensionRubyfiles = Dir.glob("#{adebeoRubyPath}/**/*.#{extension}")
   extensionRubyfiles.each{|file|
   	Sketchup::require file if ![File.basename(adebeoRubyfile, adebeoRubyExtensions)].include? File.basename(file, adebeoRubyExtensions)
