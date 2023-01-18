@@ -42,6 +42,7 @@ new_contents = text.gsub("adebeo_extensionName/adebeo_extensionName.rb", "#{edit
 new_contents = new_contents.gsub("adebeo", editeur)
 new_contents = new_contents.gsub("Adebeo", editeur_c)
 new_contents = new_contents.gsub("extensionName", extensionName)
+new_contents = new_contents.gsub("ExtensionName", extensionName_c)
 new_contents = new_contents.gsub("2016", Time.new.year.to_s)
 new_contents = new_contents.gsub("description!", description)
 new_contents = new_contents.gsub("Adebeo::ExtensionName", "#{editeur_c}::#{extensionName_c}")
@@ -70,9 +71,3 @@ file_where_module_name_changes.each{|file_where_module_name_change|
 toolbar_file = File.join(main_sub_folder_path,"view","toolbarAndCmd.json")
 new_toolbar_file = File.join(main_sub_folder_path,"view","#{extensionName_c}.json")
 File.rename(toolbar_file, new_toolbar_file)
-
-
-
-
-
-
