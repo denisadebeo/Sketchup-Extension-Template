@@ -1,8 +1,8 @@
 require 'fileutils' 
 
-editeur = "EditorName".capitalize
-extensionName = "ExtensionName".capitalize
-description = "Palette d outils pour mon métier"
+editeur = "Ready".capitalize
+extensionName = "ConceptAlu".capitalize
+description = "Concept Alu: Manufacturer of Custom Aluminum Verandas, Pergolas, Extensions, and Shelters."
 
 editeur_c = editeur.gsub(" ","_")
 extensionName_c = extensionName.gsub(" ","_")
