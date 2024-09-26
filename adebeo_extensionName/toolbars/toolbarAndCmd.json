@@ -1,7 +1,7 @@
 {
 	"tool":
 	{
-		"description":"description",
+		"description":"Draw Cube",
 		"command":"Adebeo::ExtensionName::tool_launcher",
 		"isMenu":true,
 		"isToolbar":true,

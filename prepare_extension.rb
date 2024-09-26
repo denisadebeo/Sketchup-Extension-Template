@@ -51,15 +51,29 @@ new_contents = new_contents.gsub("AdebeoExtensionName.strings", "#{editeur_c}#{e
 
 File.open(main_extension_file, "w") {|file| file.puts new_contents }
 
-
-controler_file = File.join(main_sub_folder_path,"tools","tool.rb")
+tool_file = File.join(main_sub_folder_path,"tools","tool.rb")
+model_file = File.join(main_sub_folder_path,"models","cube.rb")
+overlay_file = File.join(main_sub_folder_path,"overlays","cubes_overlay.rb")
+observer_file = File.join(main_sub_folder_path,"observers","adebeo_extension_observer.rb")
 lib_file = File.join(main_sub_folder_path,"adebeo_library.rb")
-tool_bar = File.join(main_sub_folder_path,"view","adebeo_toolbar.rb")
-cmd_json = File.join(main_sub_folder_path,"view","toolbarAndCmd.json")
-main_json = File.join(main_sub_folder_path,"adebeo_extensionName.rb")
+tool_bar_file = File.join(main_sub_folder_path,"toolbars","adebeo_toolbar.rb")
+cmd_json = File.join(main_sub_folder_path,"toolbars","toolbarAndCmd.json")
+#adebeo_extensionName_file = File.join(main_sub_folder_path,"adebeo_extensionName.rb")
+
 # Modifie le nom du module
-file_where_module_name_changes = [sub_main_extension_file, controler_file, new_conf_file, lib_file, tool_bar,cmd_json]
+file_where_module_name_changes = [
+	tool_file,
+	model_file,
+	overlay_file,
+	observer_file,
+	lib_file,
+	tool_bar_file,
+	cmd_json,
+	new_conf_file,
+	sub_main_extension_file
+]
 file_where_module_name_changes.each{|file_where_module_name_change|
+	puts file_where_module_name_change if !File.exist? file_where_module_name_change
 	text = File.read(file_where_module_name_change)
 	new_contents = text.gsub("adebeo_extensionName","#{editeur_c}_#{extensionName_c}")
 	new_contents.gsub!("Adebeo",editeur_module)
@@ -68,6 +82,6 @@ file_where_module_name_changes.each{|file_where_module_name_change|
 	File.open(file_where_module_name_change, "w") {|file| file.puts new_contents }
 }
 
-toolbar_file = File.join(main_sub_folder_path,"view","toolbarAndCmd.json")
-new_toolbar_file = File.join(main_sub_folder_path,"view","#{extensionName_c}.json")
+toolbar_file = File.join(main_sub_folder_path,"toolbars","toolbarAndCmd.json")
+new_toolbar_file = File.join(main_sub_folder_path,"toolbars","#{extensionName_c}.json")
 File.rename(toolbar_file, new_toolbar_file)
