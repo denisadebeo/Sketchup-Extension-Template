@@ -7,8 +7,8 @@ module Adebeo::ExtensionName
     actualFolder = __dir__.dup
     actualFolder.force_encoding('UTF-8') if actualFolder.respond_to?(:force_encoding)
 
-    options = Adebeo::getHashFromJsonFile "#{actualFolder}/options.json"
-    userOptions = Adebeo::getHashFromJsonFile "#{actualFolder}/userOptions.json"    
+    options = Adebeo::get_hash_from_json_file "#{actualFolder}/options.json"
+    userOptions = Adebeo::get_hash_from_json_file "#{actualFolder}/userOptions.json"
     skipDialogBox = true
     #replace defaut value of the user choice
     if userOptions
@@ -23,7 +23,7 @@ module Adebeo::ExtensionName
   		options.each{|key,option| prompts << option[:promt]}
 
   		defauls = []
-  		options.each{|key,option| 
+  		options.each{|key,option|
   		  if option[:list] != ""
   			  indexValeurPardefaut = option[:defauls].to_i
   			  listDeValeur = option[:list].split("|")
@@ -31,12 +31,12 @@ module Adebeo::ExtensionName
   			else
   			  defauls << option[:defauls].to_s
   			end
-  		} 
+  		}
 
   		list = []
   	  options.each{|key,option| list << option[:list]}
 
-  	  boiteDoption = UI.inputbox prompts, defauls, list, "Options..." 
+  	  boiteDoption = UI.inputbox prompts, defauls, list, "Options..."
       n = 0
 
       #Save the value inside the useroption file
@@ -46,7 +46,7 @@ module Adebeo::ExtensionName
           userOptions[key] = options[key][:list].split("|").index(value)
         else
            userOptions[key] = value
-        end 
+        end
         options[key][:defauls] = value
         n += 1
       }
@@ -56,7 +56,7 @@ module Adebeo::ExtensionName
       end
 
     end
-    
+
     # merge initializer and configuration
     initializer = getInitializers
     configurations = userOptions.merge(initializer)
@@ -73,9 +73,8 @@ module Adebeo::ExtensionName
     actualFolder = __dir__.dup
     actualFolder.force_encoding('UTF-8') if actualFolder.respond_to?(:force_encoding)
 
-    initializer = Adebeo::getHashFromJsonFile "#{actualFolder}/initializer.json"
+    initializer = Adebeo::get_hash_from_json_file "#{actualFolder}/initializer.json"
     return initializer
   end
 
 end
-

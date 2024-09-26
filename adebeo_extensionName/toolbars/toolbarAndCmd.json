@@ -1,8 +1,8 @@
 {
-	"cmd1":
+	"tool":
 	{
 		"description":"description",
-		"command":"Adebeo::ExtensionName::Controler.new()",
+		"command":"Adebeo::ExtensionName::tool_launcher",
 		"isMenu":true,
 		"isToolbar":true,
 		"isContext":true

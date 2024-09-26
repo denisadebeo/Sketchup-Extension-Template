@@ -7,13 +7,13 @@ module Adebeo
 	    return (value * 10 ** precision).round.to_i / 10 ** precision
 	  end
 	end
-  
-  
+
+
 	def Adebeo::log(log)
 			puts log.inspect
 	end
 
-	def Adebeo::getHashFromJsonFile(jsonFilePath, sym = true)
+	def Adebeo::get_hash_from_json_file(jsonFilePath, sym = true)
 	    # get the hash define in the jsonFilePath.json file
     	# configuration are define by symbol (ex: configurations[:key]) except if sym is false
 
@@ -22,7 +22,7 @@ module Adebeo
 	      return nil
 	    end
 	    jsonConfigurationFile = File.read(jsonFilePath)
-	    
+
 	    begin
 	      hash = JSON.parse(jsonConfigurationFile,:symbolize_names => sym)
 	    rescue JSON::ParserError
@@ -34,4 +34,3 @@ module Adebeo
 	end
 
 end
-

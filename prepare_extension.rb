@@ -1,8 +1,8 @@
-require 'fileutils' 
+require 'fileutils'
 
-editeur = "Ready".capitalize
-extensionName = "ConceptAlu".capitalize
-description = "Concept Alu: Manufacturer of Custom Aluminum Verandas, Pergolas, Extensions, and Shelters."
+editeur = "Adebeo".capitalize
+extensionName = "House".capitalize
+description = "your firstsketchup"
 
 editeur_c = editeur.gsub(" ","_")
 extensionName_c = extensionName.gsub(" ","_")
@@ -43,7 +43,7 @@ new_contents = new_contents.gsub("adebeo", editeur)
 new_contents = new_contents.gsub("Adebeo", editeur_c)
 new_contents = new_contents.gsub("extensionName", extensionName)
 new_contents = new_contents.gsub("ExtensionName", extensionName_c)
-new_contents = new_contents.gsub("2016", Time.new.year.to_s)
+new_contents = new_contents.gsub("2024", Time.new.year.to_s)
 new_contents = new_contents.gsub("description!", description)
 new_contents = new_contents.gsub("Adebeo::ExtensionName", "#{editeur_c}::#{extensionName_c}")
 new_contents = new_contents.gsub("AdebeoExtensionName.strings", "#{editeur_c}#{extensionName_c}.strings")
@@ -52,7 +52,7 @@ new_contents = new_contents.gsub("AdebeoExtensionName.strings", "#{editeur_c}#{e
 File.open(main_extension_file, "w") {|file| file.puts new_contents }
 
 
-controler_file = File.join(main_sub_folder_path,"controlers","controler.rb")
+controler_file = File.join(main_sub_folder_path,"tools","tool.rb")
 lib_file = File.join(main_sub_folder_path,"adebeo_library.rb")
 tool_bar = File.join(main_sub_folder_path,"view","adebeo_toolbar.rb")
 cmd_json = File.join(main_sub_folder_path,"view","toolbarAndCmd.json")

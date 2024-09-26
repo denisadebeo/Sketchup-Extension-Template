@@ -1,16 +1,12 @@
 
 TO create a new extension
 
-1 - rename adebeo_extensionName.rb:
-	adebeo should be the coder name
-	extensionName should be the extension name
-
-2 - rename adebeo_extensionName folder
-
-3 - inside adebeo_extensionName/*.rb
-	rename Adebeo module
-	rename ExtensionName module
-
-4 - define controller and toolbar
-5 - config and useroption
-
+1- edit prepare_extension.rb
+2 - replace this 3 value
+	editeur = "Adebeo".capitalize
+	extensionName = "Extensionname".capitalize
+	description = "your firstsketchup"
+3 - in terminal : ruby prepare_extension.rb
+4 - copy and past the content of the new folder inside the Sketchup plugin folder ( you should have a .rb file and a folder with the same name)
+	-> on pc: C:\UsersXXX\AppData\Roaming\SketchUp\SketchUp 2024\SketchUp\Plugins
+	-> on mac: /Users/denisbolomier/Library/Application Support/SketchUp 2024/SketchUp/plugins
