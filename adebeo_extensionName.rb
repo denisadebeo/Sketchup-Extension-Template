@@ -14,6 +14,7 @@
     module ExtensionName
       VERSION = "1"
       PLUGIN = self
+      LH = LanguageHandler.new("messages.strings").freeze
     end
   end
 

@@ -4,9 +4,6 @@ SUPPORTED_EXTENSIONS = ["rb", "rbe"]
 
 module Adebeo
   module ExtensionName
-
-    LH = LanguageHandler.new("messages.strings").freeze
-
     #OS
     MAC = ((Object::RUBY_PLATFORM =~ /darwin/i) ? true : false).freeze
     WIN = (!MAC).freeze

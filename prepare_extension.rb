@@ -1,8 +1,8 @@
 require 'fileutils'
 
 editeur = "Adebeo".capitalize
-extensionName = "House".capitalize
-description = "your firstsketchup"
+extensionName = "Elongator".capitalize
+description = "Scretch your component"
 
 editeur_c = editeur.gsub(" ","_")
 extensionName_c = extensionName.gsub(" ","_")
@@ -51,12 +51,13 @@ new_contents = new_contents.gsub("AdebeoExtensionName.strings", "#{editeur_c}#{e
 
 File.open(main_extension_file, "w") {|file| file.puts new_contents }
 
-tool_file = File.join(main_sub_folder_path,"tools","tool.rb")
 model_file = File.join(main_sub_folder_path,"models","cube.rb")
-overlay_file = File.join(main_sub_folder_path,"overlays","cubes_overlay.rb")
 observer_file = File.join(main_sub_folder_path,"observers","adebeo_extension_observer.rb")
+overlay_file = File.join(main_sub_folder_path,"overlays","cubes_overlay.rb")
 lib_file = File.join(main_sub_folder_path,"adebeo_library.rb")
 tool_bar_file = File.join(main_sub_folder_path,"toolbars","adebeo_toolbar.rb")
+tool_file = File.join(main_sub_folder_path,"tools","tool.rb")
+reloader_file = File.join(main_sub_folder_path,"utils","reloader.rb")
 cmd_json = File.join(main_sub_folder_path,"toolbars","toolbarAndCmd.json")
 #adebeo_extensionName_file = File.join(main_sub_folder_path,"adebeo_extensionName.rb")
 
@@ -70,7 +71,8 @@ file_where_module_name_changes = [
 	tool_bar_file,
 	cmd_json,
 	new_conf_file,
-	sub_main_extension_file
+	sub_main_extension_file,
+	reloader_file
 ]
 file_where_module_name_changes.each{|file_where_module_name_change|
 	puts file_where_module_name_change if !File.exist? file_where_module_name_change

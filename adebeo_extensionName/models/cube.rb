@@ -40,42 +40,42 @@ module Adebeo::ExtensionName
 
     def points
       [
-        bottom_left_front_face_pt,
-        bottom_right_front_face_pt,
-        bottom_left_back_face_pt,
-        bottom_right_back_face_pt,
-        top_left_front_face_pt,
-        top_right_front_face_pt,
-        top_left_back_face_pt,
-        top_right_back_face_pt
+        bottom_left_front_face_pt__A,
+        bottom_right_front_face_pt__B,
+        bottom_left_back_face_pt__C,
+        bottom_right_back_face_pt__D,
+        top_left_front_face_pt__E,
+        top_right_front_face_pt__F,
+        top_left_back_face_pt__G,
+        top_right_back_face_pt__H
       ]
     end
 
     def lines
       [
-        bottom_front_line,
-        bottom_back_line,
-        top_front_line,
-        top_back_line,
-        left_front_line,
-        left_back_line,
-        left_bottom_line,
-        left_top_line,
-        right_front_line,
-        right_back_line,
-        right_bottom_line,
-        right_top_line
+        bottom_front_line__A_B,
+        bottom_back_line__C_D,
+        top_front_line__E_F,
+        top_back_line__G_H,
+        left_front_line__A_E,
+        left_back_line__C_G,
+        left_bottom_line__A_C,
+        left_top_line__E_G,
+        right_front_line__B_F,
+        right_back_line__D_H,
+        right_bottom_line__B_D,
+        right_top_line__F_H
       ]
     end
 
     def faces
       [
-        front_face,
-        back_face,
-        left_face,
-        right_face,
-        top_face,
-        bottom_face
+        front_face__A_B_F_E,
+        back_face__G_H_D_C,
+        left_face__E_G_C_A,
+        right_face__F_H_D_B,
+        top_face__E_F_H_G,
+        bottom_face__A_B_D_C
       ]
     end
 
@@ -93,192 +93,111 @@ module Adebeo::ExtensionName
     end
 
     # points
-    def bottom_left_front_face_pt
+    def bottom_left_front_face_pt__A
       @insertion_point
     end
 
-    def bottom_right_front_face_pt
+    def bottom_right_front_face_pt__B
       @insertion_point.clone.offset!(@width_v)
     end
 
-    def bottom_left_back_face_pt
+    def bottom_left_back_face_pt__C
       @insertion_point.clone.offset!(@depth_v)
     end
 
-    def bottom_right_back_face_pt
+    def bottom_right_back_face_pt__D
       @insertion_point.clone.offset!(@width_v + @depth_v)
     end
 
-    def top_left_front_face_pt
+    def top_left_front_face_pt__E
       @insertion_point.clone.offset!(@height_v)
     end
 
-    def top_right_front_face_pt
+    def top_right_front_face_pt__F
       @insertion_point.clone.offset!(@width_v + @height_v)
     end
 
-    def top_left_back_face_pt
+    def top_left_back_face_pt__G
       @insertion_point.clone.offset!(@depth_v + @height_v)
     end
 
-    def top_right_back_face_pt
+    def top_right_back_face_pt__H
       @insertion_point.clone.offset!(@width_v + @depth_v + @height_v)
     end
 
     ### lines
-    def bottom_front_line
-      [bottom_left_front_face_pt, bottom_right_front_face_pt]
+    def bottom_front_line__A_B
+      [bottom_left_front_face_pt__A, bottom_right_front_face_pt__B]
     end
 
-    def bottom_back_line
-      [bottom_left_back_face_pt, bottom_right_back_face_pt]
+    def bottom_back_line__C_D
+      [bottom_left_back_face_pt__C, bottom_right_back_face_pt__D]
     end
 
-    def top_front_line
-      [top_left_front_face_pt, top_right_front_face_pt]
+    def top_front_line__E_F
+      [top_left_front_face_pt__E, top_right_front_face_pt__F]
     end
 
-    def top_back_line
-      [top_left_back_face_pt, top_right_back_face_pt]
+    def top_back_line__G_H
+      [top_left_back_face_pt__G, top_right_back_face_pt__H]
     end
 
-    def left_front_line
-      [bottom_left_front_face_pt, top_left_front_face_pt]
+    def left_front_line__A_E
+      [bottom_left_front_face_pt__A, top_left_front_face_pt__E]
     end
 
-    def left_back_line
-      [bottom_left_back_face_pt, top_left_back_face_pt]
+    def left_back_line__C_G
+      [bottom_left_back_face_pt__C, top_left_back_face_pt__G]
     end
 
-    def right_front_line
-      [bottom_right_front_face_pt, top_right_front_face_pt]
+    def right_front_line__B_F
+      [bottom_right_front_face_pt__B, top_right_front_face_pt__F]
     end
 
-    def right_back_line
-      [bottom_right_back_face_pt, top_right_back_face_pt]
+    def right_back_line__D_H
+      [bottom_right_back_face_pt__D, top_right_back_face_pt__H]
     end
 
-    def right_bottom_line
-      [bottom_right_front_face_pt, bottom_right_back_face_pt]
+    def right_bottom_line__B_D
+      [bottom_right_front_face_pt__B, bottom_right_back_face_pt__D]
     end
 
-    def left_bottom_line
-      [bottom_left_front_face_pt, bottom_left_back_face_pt]
+    def left_bottom_line__A_C
+      [bottom_left_front_face_pt__A, bottom_left_back_face_pt__C]
     end
 
-    def left_top_line
-      [top_left_front_face_pt, top_left_back_face_pt]
+    def left_top_line__E_G
+      [top_left_front_face_pt__E, top_left_back_face_pt__G]
     end
 
-    def right_top_line
-      [top_right_front_face_pt, top_right_back_face_pt]
+    def right_top_line__F_H
+      [top_right_front_face_pt__F, top_right_back_face_pt__H]
     end
     ### faces
 
-    def front_face
-      [bottom_left_front_face_pt, bottom_right_front_face_pt, top_right_front_face_pt, top_left_front_face_pt]
+    def front_face__A_B_F_E
+      [bottom_left_front_face_pt__A, bottom_right_front_face_pt__B, top_right_front_face_pt__F, top_left_front_face_pt__E]
     end
 
-    def back_face
-      [top_left_back_face_pt, top_right_back_face_pt, bottom_right_back_face_pt, bottom_left_back_face_pt]
+    def back_face__G_H_D_C
+      [top_left_back_face_pt__G, top_right_back_face_pt__H, bottom_right_back_face_pt__D, bottom_left_back_face_pt__C]
     end
 
-    def left_face
-      [top_left_front_face_pt, top_left_back_face_pt, bottom_left_back_face_pt, bottom_left_front_face_pt ]
+    def left_face__E_G_C_A
+      [top_left_front_face_pt__E, top_left_back_face_pt__G, bottom_left_back_face_pt__C, bottom_left_front_face_pt__A ]
     end
 
-    def right_face
-      [top_right_front_face_pt,top_right_back_face_pt, bottom_right_back_face_pt, bottom_right_front_face_pt]
+    def right_face__F_H_D_B
+      [top_right_front_face_pt__F,top_right_back_face_pt__H, bottom_right_back_face_pt__D, bottom_right_front_face_pt__B]
     end
 
-    def top_face
-      [top_left_front_face_pt, top_right_front_face_pt, top_right_back_face_pt, top_left_back_face_pt]
+    def top_face__E_F_H_G
+      [top_left_front_face_pt__E, top_right_front_face_pt__F, top_right_back_face_pt__H, top_left_back_face_pt__G]
     end
 
-    def bottom_face
-      [bottom_left_front_face_pt, bottom_right_front_face_pt, bottom_right_back_face_pt, bottom_left_back_face_pt]
+    def bottom_face__A_B_D_C
+      [bottom_left_front_face_pt__A, bottom_right_front_face_pt__B, bottom_right_back_face_pt__D, bottom_left_back_face_pt__C]
     end
 
   end
 end
-
-=begin
-module Adebeo::ExtensionName
-  class Cube
-    POSITIONS = %w[bottom top left right front back]
-
-    def initialize(insertion_point, width = 1.m, depth = 1.m, height = 1.m)
-      @insertion_point = insertion_point
-      @width = width
-      @depth = depth
-      @height = height
-      set_vectors
-      define_point_methods
-      define_line_methods
-    end
-
-    def draw(entities = nil)
-      entities = entities || Sketchup.active_model.active_entities
-      faces.each do |face|
-        entities.add_face(face)
-      end
-    end
-
-    def display(view)
-      view.draw_lines(*lines)
-    end
-
-    private
-
-    def set_vectors
-      @width_v = Geom::Vector3d.new(@width, 0, 0)
-      @depth_v = Geom::Vector3d.new(0, @depth, 0)
-      @height_v = Geom::Vector3d.new(0, 0, @height)
-    end
-
-    def define_point_methods
-      POSITIONS.combination(3).each do |pos|
-        method_name = "#{pos.join('_')}_pt"
-        define_singleton_method(method_name) do
-          point = @insertion_point.clone
-          point.offset!(@width_v) if pos.include?('right')
-          point.offset!(@depth_v) if pos.include?('back')
-          point.offset!(@height_v) if pos.include?('top')
-          point
-        end
-      end
-    end
-
-    def define_line_methods
-      POSITIONS.combination(2).each do |pos|
-        remaining = POSITIONS - pos
-        method_name = "#{pos.join('_')}_line"
-        define_singleton_method(method_name) do
-          [
-            send("#{pos.join('_')}_#{remaining[0]}_pt"),
-            send("#{pos.join('_')}_#{remaining[1]}_pt")
-          ]
-        end
-      end
-    end
-
-    def lines
-      POSITIONS.combination(2).map do |pos|
-        send("#{pos.join('_')}_line")
-      end
-    end
-
-    def faces
-      POSITIONS.map do |pos|
-        remaining = POSITIONS - [pos]
-        [
-          send("#{pos}_#{remaining[0]}_#{remaining[1]}_pt"),
-          send("#{pos}_#{remaining[0]}_#{remaining[2]}_pt"),
-          send("#{pos}_#{remaining[1]}_#{remaining[2]}_pt"),
-          send("#{pos}_#{remaining[3]}_#{remaining[4]}_pt")
-        ]
-      end
-    end
-  end
-end
-=end
